@@ -1,3 +1,32 @@
+## [0.1.0-dev.1]
+
+- BREAKING: error is now thrown instead of returned within the responses.
+Before:
+```dart
+final response = await ....;
+if (response.hasError) {
+  final error = response.error!;
+  // handle error
+} else {
+  final data = response.data!;
+  // handle data
+}
+```
+
+Now:
+```dart
+try {
+  final data = await ....;
+} on StorageError catch (error) {
+  // handle storage errors
+} catch (error) {
+  // handle other errors
+} 
+```
+- feat: added `createSignedUrls` to create signed URLs in bulk.
+- feat: added `copy` method to copy a file to another path.
+- feat: added support for custom http client
+
 ## [0.0.6+2]
 
 - fix: add status code to `StorageError` within `Fetch`
